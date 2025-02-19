@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="35dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tambah Tugas"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="16dp" />
+
+    <EditText
+        android:id="@+id/etTaskName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nama Tugas"
+        android:background="@android:drawable/editbox_background"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etTaskCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kategori"
+        android:background="@android:drawable/editbox_background"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etTaskDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tanggal (YYYY-MM-DD)"
+        android:inputType="date"
+        android:background="@android:drawable/editbox_background"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etTaskTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Jam (HH:MM)"
+        android:inputType="time"
+        android:background="@android:drawable/editbox_background"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/etTaskDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deskripsi Tugas"
+        android:inputType="textMultiLine"
+        android:background="@android:drawable/editbox_background"
+        android:padding="12dp"
+        android:layout_marginBottom="8dp" />
+
+    <Button
+        android:id="@+id/btnSaveTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simpan Tugas"
+        android:backgroundTint="#3F51B5"
+        android:textColor="#FFFFFF"
+        android:padding="12dp"
+        android:layout_marginTop="8dp" />
+</LinearLayout>

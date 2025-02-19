@@ -53,7 +53,7 @@
         android:text="Don't have an account? Register"
         android:textColor="@android:color/background_dark"
         android:textSize="14sp"
-        android:layout_below="@id/buttonLogin"
+        android:layout_below="@+id/buttonLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 
