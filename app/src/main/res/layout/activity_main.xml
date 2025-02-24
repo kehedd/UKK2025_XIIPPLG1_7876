@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="30dp"
+    android:padding="35dp"
     android:gravity="center"
     tools:context=".MainActivity">
 
@@ -23,14 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewTitle"
         android:layout_marginTop="14dp"
-        android:hint="Username"
+        android:hint="Masukkan Email"
         android:padding="13dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="Masukkan Password"
         android:inputType="textPassword"
         android:layout_below="@id/editTextUsername"
         android:layout_marginTop="16dp"

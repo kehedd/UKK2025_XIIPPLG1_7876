@@ -1,15 +1,9 @@
 package com.example.ukk_hed;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,7 +17,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
@@ -31,31 +24,30 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Dashboard extends AppCompatActivity {
+public class History extends AppCompatActivity {
 
     private ListView listView;
-    private ImageView menu, his;
+    private ImageView menu;
     private taskAdapter adapter;
     private List<task> taskList;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private static final String URL = "http://172.16.0.234/ukk_hed/listview_task.php";
-    private static final String DELETE_URL = "http://172.16.0.234/ukk_hed/hapusTsk.php";
+    private static final String URL = "http://172.16.0.234/ukk_hed/listview_history.php";
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_history);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
-        // Inisialisasi SwipeRefreshLayout
         swipeRefreshLayout = findViewById(R.id.swiperefreshh);
         listView = findViewById(R.id.list);
-        menu = findViewById(R.id.buttonplus);
         taskList = new ArrayList<>();
 
         adapter = new taskAdapter(this, taskList);
@@ -71,68 +63,6 @@ public class Dashboard extends AppCompatActivity {
                 fetchData();
             }
         });
-
-        findViewById(R.id.profil).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, HalamanProfil.class);
-                startActivity(intent);
-            }
-        });
-
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                showDeleteConfirmation(position);
-                return true;
-            }
-        });
-
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                menuDlg dialog = new menuDlg();
-                dialog.show(getSupportFragmentManager(), "HalfScreenDialog");
-            }
-        });
-
-        his = findViewById(R.id.historyIcon);
-        his.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, History.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void showDeleteConfirmation(int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Konfirmasi Hapus");
-        builder.setMessage("Apakah Anda yakin ingin menghapus task ini?");
-        builder.setPositiveButton("Hapus", (dialog, which) -> {
-            deleteBookFromServer(taskList.get(position).getNamaTugas());
-        });
-        builder.setNegativeButton("Batal", null);
-        builder.show();
-    }
-
-    private void deleteBookFromServer(String title) {
-        StringRequest request = new StringRequest(Request.Method.POST, DELETE_URL,
-                response -> {
-                    Toast.makeText(Dashboard.this, "task berhasil dihapus!", Toast.LENGTH_SHORT).show();
-                    fetchData();
-                },
-                error -> Toast.makeText(Dashboard.this, "Gagal menghapus kategori!", Toast.LENGTH_SHORT).show()) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("nama_tugas", title);
-                return params;
-            }
-        };
-
-        Volley.newRequestQueue(this).add(request);
     }
 
     private void fetchData() {

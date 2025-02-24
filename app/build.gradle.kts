@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    id("com.android.application")
 }
 
 android {
@@ -11,7 +11,7 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0" // ✅ Pindahkan ke sini agar tidak error
+        versionName = "1.0"//
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
